@@ -10,6 +10,7 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
 
     Player player;
+    Enemy enemy;
 
     public Game1()
     {
@@ -28,8 +29,12 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        var t = new Texture2D(GraphicsDevice,1,1);
+        t.SetData(new Color[]{Color.White});
 
-        player = new Player(new Vector2(400,10), new Texture2D(GraphicsDevice,1,1));
+        player = new Player(new Vector2(10,10), t);
+        enemy = new Enemy(new Vector2(200,200), t);
+
 
         // TODO: use this.Content to load your game content here
     }
@@ -39,9 +44,10 @@ public class Game1 : Game
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
 
-            player.Update();
-
         // TODO: Add your update logic here
+
+        player.Update();
+        enemy.Update();
 
         base.Update(gameTime);
     }
@@ -52,6 +58,7 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
         player.Draw(_spriteBatch);
+        enemy.Draw(_spriteBatch);
         _spriteBatch.End();
 
 
