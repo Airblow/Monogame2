@@ -7,8 +7,13 @@ namespace Monogame2
 {
     public class Player : BaseClass
     {
-        public Player(Vector2 position, Texture2D texture): base(position, texture){
+        public Player(Vector2 position, Texture2D texture, int damage, int health): base(position, texture, damage, health){
             color = Color.Green;
+        }
+
+        public override int TakeDmg()
+        {
+            return 1;
         }
 
         public override void Update()

@@ -10,12 +10,19 @@ namespace Monogame2
         protected Vector2 position;
         protected Texture2D texture;
         protected Color color;
+        protected int damage;
+        protected int health;
 
-        public BaseClass(Vector2 position, Texture2D texture){
+        public BaseClass(Vector2 position, Texture2D texture, int damage, int health){
             this.position = position;
             this.texture = texture;
             color = Color.White;
+            this.damage = damage;
+            this.health = health;
         }
+
+        public abstract int TakeDmg();
+        public abstract int DealDmg();
 
         public abstract void Update();
         public void Draw(SpriteBatch spriteBatch){

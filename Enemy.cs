@@ -8,25 +8,29 @@ namespace Monogame2
 {
     public class Enemy : BaseClass
     {
-        public Enemy(Vector2 position, Texture2D texture):base(position,texture){
+        public Enemy(Vector2 position, Texture2D texture, int damage, int health):base(position, texture, damage, health){
             color = Color.Red;
         }
 
         Random rand = new Random();
 
+        public override int TakeDmg(int dmg)
+        {
+            int health = this.health;
+            int returnHP = health - dmg;
+            return returnHP;
+        }
+
+        public override int DealDmg()
+        {
+            int damage = this.damage;
+            return damage;
+        }
         public override void Update(){
-            int r = rand.Next(1,75);
-            if(r == 1){
-                position.Y += 10;
-            }
-            if(r == 2){
-                position.Y -= 10;
-            }
-            if(r == 3){
-                position.X += 10;
-            }
-            if(r == 4){
-                position.X -= 10;
+            position.X -=2;
+
+            if(health >= 0){
+
             }
         }
     }

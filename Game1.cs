@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.VisualBasic.ApplicationServices;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,6 +13,8 @@ public class Game1 : Game
 
     Player player;
     Enemy enemy;
+
+    Random rand = new Random();
 
     public Game1()
     {
@@ -32,8 +36,12 @@ public class Game1 : Game
         var t = new Texture2D(GraphicsDevice,1,1);
         t.SetData(new Color[]{Color.White});
 
+        if(rand.Next(1,100) < 15){
+            int r = rand.Next(1,400);
+            enemy = new Enemy(new Vector2(800,r), t);
+        }
+
         player = new Player(new Vector2(10,10), t);
-        enemy = new Enemy(new Vector2(200,200), t);
 
 
         // TODO: use this.Content to load your game content here
