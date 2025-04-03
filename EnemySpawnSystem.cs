@@ -6,9 +6,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Monogame2
 {
-    public class EnemySpawn
+    public class EnemySpawnSystem
     {
         List<BaseClass> enemies = new List<BaseClass>();
+        Texture2D texture;
+        Vector2 position;
+        Random random = new Random();
+
+                
 
     }
 }
