@@ -7,12 +7,12 @@ namespace Monogame2
 {
     public class Enemy : BaseClass
     {
-        public Enemy(Vector2 position, Texture2D texture):base(position, texture){
+        public Enemy(Vector2 position, Texture2D texture, int size):base(position, texture, size){
             color = Color.DarkRed;
         }
 
         public override void Update(){
-            position.X -= 1;
+            position.X += 1;
         }
 
     }

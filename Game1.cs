@@ -10,12 +10,13 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
+    private EnemySpawnSystem _enemySpawnSystem;
+
+    private Texture2D _baseEnemyTexture;
+
 
     Player player;
-    Enemy enemy;
-
-    Random rand = new Random();
-
+    
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -33,15 +34,14 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        var t = new Texture2D(GraphicsDevice,1,1);
-        t.SetData(new Color[]{Color.White});
+        _enemySpawnSystem = new EnemySpawnSystem();
 
-        if(rand.Next(1,100) < 15){
-            int r = rand.Next(1,400);
-            enemy = new Enemy(new Vector2(800,r), t);
-        }
+        var pixel = new Texture2D(GraphicsDevice,1,1);
+        pixel.SetData(new Color[]{Color.White});
 
-        player = new Player(new Vector2(10,10), t);
+        _baseEnemyTexture = pixel;
+
+        player = new Player(new Vector2(10,10), pixel, 10);
 
 
         // TODO: use this.Content to load your game content here
@@ -55,7 +55,7 @@ public class Game1 : Game
         // TODO: Add your update logic here
 
         player.Update();
-        enemy.Update();
+        _enemySpawnSystem.Update();
 
         base.Update(gameTime);
     }
@@ -66,7 +66,7 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
         player.Draw(_spriteBatch);
-        enemy.Draw(_spriteBatch);
+        _enemySpawnSystem.Draw(_spriteBatch);
         _spriteBatch.End();
 
 

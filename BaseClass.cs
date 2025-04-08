@@ -9,11 +9,13 @@ namespace Monogame2
     {
         protected Vector2 position;
         protected Texture2D texture;
+        protected int size;
         protected Color color;
 
-        public BaseClass(Vector2 position, Texture2D texture){
+        public BaseClass(Vector2 position, Texture2D texture, int size){
             this.position = position;
             this.texture = texture;
+            this.size = size;
             color = Color.White;
         }
 
