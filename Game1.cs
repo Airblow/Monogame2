@@ -41,7 +41,7 @@ public class Game1 : Game
 
         _baseEnemyTexture = pixel;
 
-        player = new Player(new Vector2(10,10), pixel, 10);
+        player = new Player(new Vector2(10,10), pixel, 10, 100);
 
 
         // TODO: use this.Content to load your game content here
@@ -55,6 +55,7 @@ public class Game1 : Game
         // TODO: Add your update logic here
 
         player.Update();
+        _enemySpawnSystem.ESpawnSystem(_baseEnemyTexture);
         _enemySpawnSystem.Update();
 
         base.Update(gameTime);

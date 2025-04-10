@@ -13,17 +13,20 @@ namespace Monogame2
 
         public void ESpawnSystem(Texture2D baseEnemyTexture){
             BaseClass newObject = null;
-            Vector2 spawnPoint = new Vector2(random.Next(0,800), random.Next(10, 50));
-            int enemyType = 1; //random.Next();
+            Vector2 spawnPoint = new Vector2(800, random.Next(10, 430));
 
-            switch(enemyType){
-                case 1:
-                    newObject = new Enemy(spawnPoint, baseEnemyTexture, 10);
-                break;
-            }
+            if(random.Next(1, 100) == 1){
+                int enemyType = 1; //random.Next();
 
-            if(newObject != null){
-                enemiesList.Add(newObject);
+                switch(enemyType){
+                    case 1:
+                        newObject = new Enemy(spawnPoint, baseEnemyTexture, 10, 100);
+                    break;
+                }
+
+                if(newObject != null){
+                    enemiesList.Add(newObject);
+                }
             }
         }
 
