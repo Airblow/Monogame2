@@ -18,25 +18,25 @@ namespace Monogame2
                 position.Y -= 2;
             }
             if(kState.IsKeyDown(Keys.W) && kState.IsKeyDown(Keys.LeftShift)){
-                position.Y -=4;
+                position.Y -=3;
             }
             if(kState.IsKeyDown(Keys.S)){
                 position.Y += 2;
             }
             if(kState.IsKeyDown(Keys.S) && kState.IsKeyDown(Keys.LeftShift)){
-                position.Y +=4;
+                position.Y +=3;
             }
             if(kState.IsKeyDown(Keys.A)){
                 position.X -= 2;
             }
             if(kState.IsKeyDown(Keys.A) && kState.IsKeyDown(Keys.LeftShift)){
-                position.X -=4;
+                position.X -=3;
             }
             if(kState.IsKeyDown(Keys.D)){
                 position.X += 2;
             }
             if(kState.IsKeyDown(Keys.D) && kState.IsKeyDown(Keys.LeftShift)){
-                position.X +=4;
+                position.X +=3;
             }
         }
     }

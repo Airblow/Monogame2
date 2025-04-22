@@ -15,7 +15,7 @@ namespace Monogame2
             BaseClass newObject = null;
             Vector2 spawnPoint = new Vector2(800, random.Next(10, 430));
 
-            if(random.Next(1, 100) == 1){
+            if(random.Next(1, 150) == 1){
                 int enemyType = 1; //random.Next();
 
                 switch(enemyType){

@@ -14,7 +14,6 @@ namespace Monogame2
         protected int size;
         protected Color color;
         protected int health;
-        protected float clock = 1f/60f;
 
         public BaseClass(Vector2 position, Texture2D texture, int size, int health){
             this.position = position;
