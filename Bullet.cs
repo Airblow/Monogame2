@@ -6,9 +6,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Monogame2
 {
-    public class PlayerShot
+    public class Bullet
     {
-        public PlayerShot(Vector2 position, Texture2D texture, float velocity, float size, float damage){
+        protected Vector2 position;
+        protected Texture2D texture;
+        protected float velocity;
+        protected int size;
+        protected int damage;
+        protected Color color;
+
+        public Bullet(Vextor2 position, Texture2D texture, float velocity, int size, int damage){
             this.position = position;
             this.texture = texture;
             this.velocity = velocity;
@@ -19,7 +26,7 @@ namespace Monogame2
 
         public void Update(){
             
-            
         }
+
     }
 }

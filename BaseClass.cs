@@ -24,6 +24,7 @@ namespace Monogame2
         }
 
         public abstract void Update();
+        
         public void Draw(SpriteBatch spriteBatch){
             Rectangle rectangle = new Rectangle((int)position.X,(int)position.Y,35,35);
             spriteBatch.Draw(texture, rectangle, color);
