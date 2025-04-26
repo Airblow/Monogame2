@@ -16,6 +16,7 @@ namespace Monogame2
         protected int health;
 
         public Vector2 Position => position;
+        public int Health => health;
 
         public BaseClass(Vector2 position, Texture2D texture, int size, int health){
             this.position = position;

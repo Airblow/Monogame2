@@ -61,7 +61,7 @@ public class Game1 : Game
         player.Update();
         _enemySpawnSystem.ESpawnSystem(_baseEnemyTexture);
         _enemySpawnSystem.Update();
-        _playerShot.BulletShootSystem(player.Position, _baseBulletTexture);
+        _playerShot.BulletShootSystem(player.Position, _baseBulletTexture, gameTime);
         _playerShot.Update();
 
         base.Update(gameTime);

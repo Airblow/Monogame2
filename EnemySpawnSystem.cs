@@ -30,6 +30,17 @@ namespace Monogame2
             }
         }
 
+        private void TakeDamage(){
+        }
+
+        private void RemoveEnemy(){
+            for(int i = 0; i < enemiesList.Count; i++){
+                if(enemiesList[i].Health <= 0){
+                    enemiesList.RemoveAt(i);
+                }
+            }
+        }
+
         public void Update(){
             foreach(BaseClass bc in enemiesList){
                 bc.Update();

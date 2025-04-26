@@ -13,10 +13,5 @@ namespace Monogame2
         public override void Update(){
             position.X -= 0.75f;
         }
-
-        public void TakeDamage(){
-
-        }
-
     }
 }
