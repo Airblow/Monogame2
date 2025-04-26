@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Numerics;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Monogame2
 {
@@ -14,19 +14,25 @@ namespace Monogame2
         protected int size;
         protected int damage;
         protected Color color;
+        protected Vector2 direction;
 
-        public Bullet(Vextor2 position, Texture2D texture, float velocity, int size, int damage){
+        public Bullet(Vector2 position, Texture2D texture, float velocity, int size, int damage, Vector2 direction){
             this.position = position;
             this.texture = texture;
             this.velocity = velocity;
             this.size = size;
             this.damage = damage;
             color = Color.Black;
+            this.direction = direction;
         }
 
-        public void Update(){
-            
+        public void Update(MouseState mState){
+            position += direction * velocity;
         }
 
+        public void Draw(SpriteBatch spriteBatch){
+            Rectangle rectangle = new Rectangle((int)position.X,(int)position.Y,size,size);
+            spriteBatch.Draw(texture, rectangle, color);
+        }
     }
 }

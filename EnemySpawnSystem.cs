@@ -20,7 +20,7 @@ namespace Monogame2
 
                 switch(enemyType){
                     case 1:
-                        newObject = new Enemy(spawnPoint, baseEnemyTexture, 10, 100);
+                        newObject = new Enemy(spawnPoint, baseEnemyTexture, 30, 100);
                     break;
                 }
 

@@ -11,9 +11,10 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private EnemySpawnSystem _enemySpawnSystem;
+    private PlayerShot _playerShot;
 
     private Texture2D _baseEnemyTexture;
-
+    private Texture2D _baseBulletTexture;
 
     Player player;
     
@@ -35,14 +36,15 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         _enemySpawnSystem = new EnemySpawnSystem();
+        _playerShot = new PlayerShot();
 
         var pixel = new Texture2D(GraphicsDevice,1,1);
         pixel.SetData(new Color[]{Color.White});
 
         _baseEnemyTexture = pixel;
+        _baseBulletTexture = pixel;
 
-        player = new Player(new Vector2(10,10), pixel, 10, 100);
-
+        player = new Player(new Vector2(10,10), pixel, 30, 100);
 
         // TODO: use this.Content to load your game content here
     }
@@ -54,9 +56,13 @@ public class Game1 : Game
 
         // TODO: Add your update logic here
 
+        MouseState mState = Mouse.GetState();
+
         player.Update();
         _enemySpawnSystem.ESpawnSystem(_baseEnemyTexture);
         _enemySpawnSystem.Update();
+        _playerShot.BulletShootSystem(player.Position, _baseBulletTexture);
+        _playerShot.Update();
 
         base.Update(gameTime);
     }
@@ -68,8 +74,8 @@ public class Game1 : Game
         _spriteBatch.Begin();
         player.Draw(_spriteBatch);
         _enemySpawnSystem.Draw(_spriteBatch);
+        _playerShot.Draw(_spriteBatch);
         _spriteBatch.End();
-
 
         base.Draw(gameTime);
     }

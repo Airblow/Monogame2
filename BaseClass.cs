@@ -15,6 +15,8 @@ namespace Monogame2
         protected Color color;
         protected int health;
 
+        public Vector2 Position => position;
+
         public BaseClass(Vector2 position, Texture2D texture, int size, int health){
             this.position = position;
             this.texture = texture;
@@ -26,7 +28,7 @@ namespace Monogame2
         public abstract void Update();
         
         public void Draw(SpriteBatch spriteBatch){
-            Rectangle rectangle = new Rectangle((int)position.X,(int)position.Y,35,35);
+            Rectangle rectangle = new Rectangle((int)position.X,(int)position.Y,size,size);
             spriteBatch.Draw(texture, rectangle, color);
         }
     }

@@ -1,7 +1,9 @@
+
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.MediaFoundation;
 
 namespace Monogame2
 {
@@ -11,33 +13,37 @@ namespace Monogame2
             color = Color.Green;
         }
 
+        private float velocity;
+
         public override void Update()
         {
             KeyboardState kState = Keyboard.GetState();
+            Vector2 movement = Vector2.Zero;
+
             if(kState.IsKeyDown(Keys.W)){
-                position.Y -= 2;
-            }
-            if(kState.IsKeyDown(Keys.W) && kState.IsKeyDown(Keys.LeftShift)){
-                position.Y -=3;
+                movement.Y -= 2;
             }
             if(kState.IsKeyDown(Keys.S)){
-                position.Y += 2;
-            }
-            if(kState.IsKeyDown(Keys.S) && kState.IsKeyDown(Keys.LeftShift)){
-                position.Y +=3;
+                movement.Y += 2;
             }
             if(kState.IsKeyDown(Keys.A)){
-                position.X -= 2;
-            }
-            if(kState.IsKeyDown(Keys.A) && kState.IsKeyDown(Keys.LeftShift)){
-                position.X -=3;
+                movement.X -= 2;
             }
             if(kState.IsKeyDown(Keys.D)){
-                position.X += 2;
+                movement.X += 2;
             }
-            if(kState.IsKeyDown(Keys.D) && kState.IsKeyDown(Keys.LeftShift)){
-                position.X +=3;
+          
+            if(kState.IsKeyDown(Keys.LeftShift)){
+                velocity = 5f;
             }
+            else{
+                velocity = 3f;
+            }
+
+            if(movement.Length() > 0){
+                movement.Normalize();
+            }
+            position += movement * velocity;
         }
     }
 }
