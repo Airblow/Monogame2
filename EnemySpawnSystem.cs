@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Numerics;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -15,12 +16,12 @@ namespace Monogame2
             BaseClass newObject = null;
             Vector2 spawnPoint = new Vector2(800, random.Next(10, 430));
 
-            if(random.Next(1, 150) == 1){
+            if(random.Next(1, 120) == 1){
                 int enemyType = 1; //random.Next();
 
                 switch(enemyType){
                     case 1:
-                        newObject = new Enemy(spawnPoint, baseEnemyTexture, 30, 100);
+                        newObject = new Enemy(spawnPoint, baseEnemyTexture, 30, 1000);
                     break;
                 }
 
@@ -28,9 +29,6 @@ namespace Monogame2
                     enemiesList.Add(newObject);
                 }
             }
-        }
-
-        private void TakeDamage(){
         }
 
         private void RemoveEnemy(){
@@ -41,8 +39,22 @@ namespace Monogame2
             }
         }
 
-        public void Update(){
-            foreach(BaseClass bc in enemiesList){
+        public void CheckCollision(Bullet bullet)
+        {
+            for (int i = 0; i < enemiesList.Count; i++)
+            {
+                if (enemiesList[i].GetBounds().Intersects(bullet.GetBounds()))
+                {
+                    enemiesList[i].Health -= bullet.Damage;
+                }
+            }
+            RemoveEnemy();
+        }
+
+        public void Update()
+        {
+            foreach (BaseClass bc in enemiesList)
+            {
                 bc.Update();
             }
         }

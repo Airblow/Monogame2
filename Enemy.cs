@@ -10,7 +10,8 @@ namespace Monogame2
             color = Color.DarkRed;
         }
 
-        public override void Update(){
+        public override void Update()
+        {
             position.X -= 0.75f;
         }
     }

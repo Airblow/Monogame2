@@ -56,13 +56,12 @@ public class Game1 : Game
 
         // TODO: Add your update logic here
 
-        MouseState mState = Mouse.GetState();
-
         player.Update();
         _enemySpawnSystem.ESpawnSystem(_baseEnemyTexture);
         _enemySpawnSystem.Update();
         _playerShot.BulletShootSystem(player.Position, _baseBulletTexture, gameTime);
-        _playerShot.Update();
+        _playerShot.Update(_enemySpawnSystem);
+        
 
         base.Update(gameTime);
     }

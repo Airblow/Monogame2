@@ -25,17 +25,37 @@ namespace Monogame2
                 direction.Normalize();
 
 
-                newObject = new Bullet(position, baseBulletTexture, 5, 10, 100, direction);
+                newObject = new Bullet(position, baseBulletTexture, 10, 10, 25, direction);
                 if(newObject != null){
                     bulletsList.Add(newObject);
                     timeLastShot = 0f;
                 }
             }
         }
-        
-        public void Update(){
-            foreach(Bullet blts in bulletsList){
+
+        /*
+        public void CheckCollision(EnemySpawnSystem enemy)
+        {
+            for (int i = 0; i < bulletsList.Count; i++)
+            {
+                if (bulletsList[i].GetBounds().Intersects(enemy.GetBounds()))
+                {
+                    bulletsList.RemoveAt(i);
+                }
+            }
+        }
+        */
+
+        public void Update(EnemySpawnSystem enemySpawn)
+        {
+            foreach (Bullet blts in bulletsList)
+            {
                 blts.Update(Mouse.GetState());
+            }
+
+            for (int i = 0; i < bulletsList.Count; i++)
+            {
+                enemySpawn.CheckCollision(bulletsList[i]);
             }
         }   
 

@@ -16,7 +16,10 @@ namespace Monogame2
         protected Color color;
         protected Vector2 direction;
 
-        public Bullet(Vector2 position, Texture2D texture, float velocity, int size, int damage, Vector2 direction){
+        public int Damage => damage;
+
+        public Bullet(Vector2 position, Texture2D texture, float velocity, int size, int damage, Vector2 direction)
+        {
             this.position = position;
             this.texture = texture;
             this.velocity = velocity;
@@ -26,12 +29,19 @@ namespace Monogame2
             this.direction = direction;
         }
 
-        public void Update(MouseState mState){
+        public Rectangle GetBounds()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, size, size);
+        }
+        
+        public void Update(MouseState mState)
+        {
             position += direction * velocity;
         }
 
-        public void Draw(SpriteBatch spriteBatch){
-            Rectangle rectangle = new Rectangle((int)position.X,(int)position.Y,size,size);
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            Rectangle rectangle = new Rectangle((int)position.X, (int)position.Y, size, size);
             spriteBatch.Draw(texture, rectangle, color);
         }
     }
