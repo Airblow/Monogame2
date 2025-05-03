@@ -16,6 +16,8 @@ namespace Monogame2
         protected Color color;
         protected Vector2 direction;
 
+        public bool isActiveProjectile = true;
+
         public int Damage => damage;
 
         public Bullet(Vector2 position, Texture2D texture, float velocity, int size, int damage, Vector2 direction)

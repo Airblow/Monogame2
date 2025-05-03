@@ -21,7 +21,7 @@ namespace Monogame2
 
                 switch(enemyType){
                     case 1:
-                        newObject = new Enemy(spawnPoint, baseEnemyTexture, 30, 1000);
+                        newObject = new Enemy(spawnPoint, baseEnemyTexture, 30, 100);
                     break;
                 }
 
@@ -34,6 +34,10 @@ namespace Monogame2
         private void RemoveEnemy(){
             for(int i = 0; i < enemiesList.Count; i++){
                 if(enemiesList[i].Health <= 0){
+                    enemiesList[i].isActiveEntity = false;
+                }
+
+                if(enemiesList[i].isActiveEntity == false){
                     enemiesList.RemoveAt(i);
                 }
             }
@@ -46,6 +50,7 @@ namespace Monogame2
                 if (enemiesList[i].GetBounds().Intersects(bullet.GetBounds()))
                 {
                     enemiesList[i].Health -= bullet.Damage;
+                    bullet.isActiveProjectile = false;
                 }
             }
             RemoveEnemy();

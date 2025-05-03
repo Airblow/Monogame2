@@ -25,7 +25,7 @@ namespace Monogame2
                 direction.Normalize();
 
 
-                newObject = new Bullet(position, baseBulletTexture, 10, 10, 25, direction);
+                newObject = new Bullet(position, baseBulletTexture, 10, 10, 50, direction);
                 if(newObject != null){
                     bulletsList.Add(newObject);
                     timeLastShot = 0f;
@@ -33,18 +33,13 @@ namespace Monogame2
             }
         }
 
-        /*
-        public void CheckCollision(EnemySpawnSystem enemy)
-        {
-            for (int i = 0; i < bulletsList.Count; i++)
-            {
-                if (bulletsList[i].GetBounds().Intersects(enemy.GetBounds()))
-                {
+        private void RemoveShot(){
+            for(int i = 0; i < bulletsList.Count; i++){
+                if(bulletsList[i].isActiveProjectile != true){
                     bulletsList.RemoveAt(i);
                 }
             }
         }
-        */
 
         public void Update(EnemySpawnSystem enemySpawn)
         {
@@ -57,6 +52,7 @@ namespace Monogame2
             {
                 enemySpawn.CheckCollision(bulletsList[i]);
             }
+            RemoveShot();
         }   
 
         public void Draw(SpriteBatch spriteBatch){

@@ -14,6 +14,7 @@ namespace Monogame2
         protected int size;
         protected Color color;
         protected int health;
+        public bool isActiveEntity = true;
 
         public Vector2 Position => position;
         
