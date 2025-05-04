@@ -7,6 +7,7 @@ namespace Monogame2;
 
 public class Game1 : Game
 {
+    private GameState currentGameState = GameState.Playing;
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     SpriteFont font;
@@ -19,6 +20,14 @@ public class Game1 : Game
     private Texture2D _vaultTexture;
 
     Player player;
+
+    private void RestartGame(){
+        player = new Player(new Vector2(10,10), _baseBulletTexture, 30, 100, 50);
+        _vault = new Vault(new Vector2 (0,0), _vaultTexture, 7, 1000);
+        _enemySpawnSystem = new EnemySpawnSystem();
+        _playerShot = new PlayerShot();
+        currentGameState = GameState.Playing;
+    }
     
     public Game1()
     {
@@ -62,13 +71,25 @@ public class Game1 : Game
 
         // TODO: Add your update logic here
 
-        player.Update();
-        _enemySpawnSystem.ESpawnSystem(_baseEnemyTexture);
-        _enemySpawnSystem.Update();
-        _playerShot.BulletShootSystem(player.Position, _baseBulletTexture, gameTime);
-        _playerShot.Update(_enemySpawnSystem);
-        _vault.Update(_enemySpawnSystem);
-        
+        if(currentGameState == GameState.GameOver){
+            if(Keyboard.GetState().IsKeyDown(Keys.R)){
+                RestartGame();
+                return;
+            }
+        }
+
+        if(currentGameState == GameState.Playing){
+            player.Update();
+            _enemySpawnSystem.ESpawnSystem(_baseEnemyTexture);
+            _enemySpawnSystem.Update();
+            _playerShot.BulletShootSystem(player.Position, _baseBulletTexture, gameTime);
+            _playerShot.Update(_enemySpawnSystem);
+            _vault.Update(_enemySpawnSystem);
+
+            if(_vault.Health <= 0){
+                currentGameState = GameState.GameOver;
+            }
+        }
 
         base.Update(gameTime);
     }
@@ -78,12 +99,18 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         _spriteBatch.Begin();
-        player.Draw(_spriteBatch);
-        _enemySpawnSystem.Draw(_spriteBatch);
-        _playerShot.Draw(_spriteBatch);
-        _vault.Draw(_spriteBatch);
 
-        _spriteBatch.DrawString(font,$"Vault Health {_vault.Health}", new Vector2(50, 20), Color.White);
+        if(currentGameState == GameState.Playing){
+            player.Draw(_spriteBatch);
+            _enemySpawnSystem.Draw(_spriteBatch);
+            _playerShot.Draw(_spriteBatch);
+            _vault.Draw(_spriteBatch);
+            _spriteBatch.DrawString(font,$"Vault Health {_vault.Health}", new Vector2(50, 20), Color.White);
+        }
+        else if(currentGameState == GameState.GameOver){
+            _spriteBatch.DrawString(font,"Game Over, press 'R' to restart", new Vector2(240,240), Color.White);
+        }
+
         _spriteBatch.End();
 
         base.Draw(gameTime);
