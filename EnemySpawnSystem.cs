@@ -10,18 +10,19 @@ namespace Monogame2
     public class EnemySpawnSystem
     {
         List<BaseClass> enemiesList = new List<BaseClass>();
+        public List<BaseClass> Enemies => enemiesList;
         Random random = new Random();
 
         public void ESpawnSystem(Texture2D baseEnemyTexture){
             BaseClass newObject = null;
-            Vector2 spawnPoint = new Vector2(800, random.Next(10, 430));
+            Vector2 spawnPoint = new Vector2(800, random.Next(10, 440));
 
-            if(random.Next(1, 120) == 1){
+            if(random.Next(1, 60) == 1){
                 int enemyType = 1; //random.Next();
 
                 switch(enemyType){
                     case 1:
-                        newObject = new Enemy(spawnPoint, baseEnemyTexture, 30, 100);
+                        newObject = new Enemy(spawnPoint, baseEnemyTexture, 30, 100,100);
                     break;
                 }
 
@@ -32,7 +33,7 @@ namespace Monogame2
         }
 
         private void RemoveEnemy(){
-            for(int i = 0; i < enemiesList.Count; i++){
+            for(int i = enemiesList.Count - 1; i >=0; i--){
                 if(enemiesList[i].Health <= 0){
                     enemiesList[i].isActiveEntity = false;
                 }
@@ -43,32 +44,29 @@ namespace Monogame2
             }
         }
 
-        public void CheckCollision(Bullet bullet)
-        {
+        public void CheckCollision(Bullet bullet){
             for (int i = 0; i < enemiesList.Count; i++)
             {
                 if (enemiesList[i].GetBounds().Intersects(bullet.GetBounds()))
                 {
-                    enemiesList[i].Health -= bullet.Damage;
-                    bullet.isActiveProjectile = false;
+                    enemiesList[i].Health -= bullet.Damage; 
+                    bullet.isActiveProjectile = false; 
                 }
             }
-            RemoveEnemy();
         }
 
-        public void Update()
-        {
+        public void Update(){
             foreach (BaseClass bc in enemiesList)
             {
                 bc.Update();
             }
+            RemoveEnemy();
         }
 
         public void Draw(SpriteBatch spriteBatch){
             foreach(BaseClass bc in enemiesList){
                 bc.Draw(spriteBatch);
             }
-        }
-                
+        }               
     }
 }

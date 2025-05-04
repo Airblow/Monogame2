@@ -9,7 +9,7 @@ namespace Monogame2
 {
     public class Player : BaseClass
     {
-        public Player(Vector2 position, Texture2D texture, int size, int health): base(position, texture, size, health){
+        public Player(Vector2 position, Texture2D texture, int size, int health, int damage): base(position, texture, size, health, damage){
             color = Color.Green;
         }
 

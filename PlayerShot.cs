@@ -41,8 +41,7 @@ namespace Monogame2
             }
         }
 
-        public void Update(EnemySpawnSystem enemySpawn)
-        {
+        public void Update(EnemySpawnSystem enemySpawn){
             foreach (Bullet blts in bulletsList)
             {
                 blts.Update(Mouse.GetState());

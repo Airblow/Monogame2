@@ -14,27 +14,31 @@ namespace Monogame2
         protected int size;
         protected Color color;
         protected int health;
+        protected int damage;
         public bool isActiveEntity = true;
 
         public Vector2 Position => position;
         
-        public int Health
-        {
+        public int Health{
             get => health;
             set => health = value;
         }
 
-        public BaseClass(Vector2 position, Texture2D texture, int size, int health)
+        public int Damage{
+            get => damage;
+        }
+
+        public BaseClass(Vector2 position, Texture2D texture, int size, int health, int damage)
         {
             this.position = position;
             this.texture = texture;
             this.size = size;
             this.health = health;
+            this.damage = damage;
             color = Color.White;
         }
 
-        public Rectangle GetBounds()
-        {
+        public Rectangle GetBounds(){
             return new Rectangle((int)position.X, (int)position.Y, size, size);
         }
 
